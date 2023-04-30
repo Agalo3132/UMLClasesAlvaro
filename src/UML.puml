@@ -1,15 +1,8 @@
 @startuml
 
-Class Event {
-date : Date
-description : String
+Class Event
 
-assign(l : Location) : void
-}
-
-Class Conference {
-max_attendees : Integer
-}
+Class Conference
 
 Class BoardMeeting
 
@@ -18,45 +11,32 @@ Class BoardMeeting
 
 Class BoardMember
 
-Class Member {
-e-mail : String
-}
+Class Member
 
-Class Person{
-name : String
-}
+Class Person
 
 BoardMember --|> Member
 
 Member --|> Person
 
 
-Class Location {
-description: String
-address : String
-}
+Class Location
 
-Class AAUOC {
-newLocation(l : Location) : void
-newEvent(e : Event) : void
-newPerson(p : Person) : void
-informEvent(e : Event) : void
-register(m : Member,e : Event) : void
-}
+Class AAUOC
 
 
-Location -- Event : isLocated In
+Location "1" -- "0..*" Event : isLocated In
 
-Location --o AAUOC
+Location "0..*" --o AAUOC
 
-Event -- Member : attendsTo
+Event "0..*" -- "0..*" Member : attendsTo
 
-BoardMeeting -- BoardMember : attendsTo
+BoardMeeting "0..*" -- "0..*" BoardMember : attendsTo
 
-Conference -- Person : attendsTo
+Conference "0..*" -- "0..*" Person : attendsTo
 
-Event --o AAUOC
+Event "0..*" --o AAUOC
 
-Person --o AAUOC
+Person "0..*" --o AAUOC
 
 @enduml
